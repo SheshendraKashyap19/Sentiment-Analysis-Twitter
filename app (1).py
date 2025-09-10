@@ -1,21 +1,15 @@
 import pickle
 import numpy as np
-import spacy
 import streamlit as st
+from sklearn.feature_extraction.text import TfidfVectorizer
 
-# Show spaCy version (for debugging)
-st.write("spaCy version:", spacy.__version__)
-
-# Cache the model so it doesn’t reload on every rerun
-@st.cache_resource
-def load_model():
-    return spacy.load("en_core_web_md")
-
-nlp = load_model()
-
-# Load trained ML model
+# Load trained model
 with open('logistic_sentiment_model.pkl', 'rb') as f:
     model = pickle.load(f)
+
+# Load TF-IDF vectorizer (make sure you saved it during training!)
+with open('tfidf_vectorizer.pkl', 'rb') as f:
+    vectorizer = pickle.load(f)
 
 positive_keywords = ['love', 'amazing', 'awesome', 'fantastic', 'best', 'happy', 'great', 'excellent']
 negative_keywords = ['hate', 'terrible', 'awful', 'worst', 'disappointing', 'sad']
@@ -27,7 +21,7 @@ def predict_sentiment(tweet):
     elif any(word in tweet_lower for word in negative_keywords):
         return "Negative"
     
-    vector = nlp(tweet).vector.reshape(1, -1)
+    vector = vectorizer.transform([tweet])
     pred = model.predict(vector)[0]
     return "Positive" if pred == 1 else "Negative"
 
