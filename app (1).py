@@ -1,6 +1,4 @@
-#import streamlit as st
 import pickle
-#import spacy
 import numpy as np
 import spacy
 import streamlit as st
