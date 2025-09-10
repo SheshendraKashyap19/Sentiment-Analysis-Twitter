@@ -2,7 +2,10 @@ import streamlit as st
 import pickle
 import spacy
 import numpy as np
-nlp = spacy.load("en_core_web_sm")
+
+# Load spaCy embeddings
+nlp = spacy.load("en_core_web_md")
+
 
 # Load trained model
 with open('logistic_sentiment_model.pkl', 'rb') as f:
