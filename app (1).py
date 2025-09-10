@@ -1,7 +1,12 @@
-import streamlit as st
+#import streamlit as st
 import pickle
-import spacy
+#import spacy
 import numpy as np
+import spacy
+import streamlit as st
+
+st.write("spaCy version:", spacy.__version__)
+
 
 # Load spaCy embeddings
 nlp = spacy.load("en_core_web_md")
