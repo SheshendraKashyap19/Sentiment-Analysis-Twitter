@@ -3,19 +3,19 @@ import numpy as np
 import spacy
 import streamlit as st
 
+# Show spaCy version (for debugging)
 st.write("spaCy version:", spacy.__version__)
 
+# Cache the model so it doesn’t reload on every rerun
+@st.cache_resource
+def load_model():
+    return spacy.load("en_core_web_md")
 
-# Load spaCy embeddings
-nlp = spacy.load("en_core_web_md")
+nlp = load_model()
 
-
-# Load trained model
+# Load trained ML model
 with open('logistic_sentiment_model.pkl', 'rb') as f:
     model = pickle.load(f)
-
-# Load spaCy embeddings
-nlp = spacy.load('en_core_web_md')
 
 positive_keywords = ['love', 'amazing', 'awesome', 'fantastic', 'best', 'happy', 'great', 'excellent']
 negative_keywords = ['hate', 'terrible', 'awful', 'worst', 'disappointing', 'sad']
@@ -31,6 +31,7 @@ def predict_sentiment(tweet):
     pred = model.predict(vector)[0]
     return "Positive" if pred == 1 else "Negative"
 
+# Streamlit UI
 st.title("Tweet Sentiment Analyzer")
 st.write("Enter a tweet below to predict its sentiment:")
 
