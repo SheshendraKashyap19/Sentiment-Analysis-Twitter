@@ -21,5 +21,5 @@ This is a **Machine Learning project** to classify Twitter posts into **Positive
 
 ## Usage
 1. Clone the repo:  
-```bash
-git clone https://github.com/yourusername/Sentiment-Analysis-Twitter.git
+```bash[
+git clone https://github.com/yourusername/Sentiment-Analysis-Twitter.git](https://github.com/SheshendraKashyap19/Sentiment-Analysis-Twitter/blob/main/README.md)
